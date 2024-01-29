@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style type="text/css">
+      body {
+        font-family: cursive;
+        padding-left: 2%;
+        padding-right: 2%;
+        background: radial-gradient(#8524fd, rgb(131, 2, 157));
+      }
+      .main-header {
+        padding: 1%;
+        width: 100%;
+        min-height: 4rem;
+        background: linear-gradient(45deg, #f93281, #f64c03, #f7fe22);
+        display: flex;
+        /* The flex-direction property defines in which direction the container wants to stack the flex items. */
+        flex-direction: row;
+        /* The flex-wrap property specifies whether the flex items should wrap or not.(nowrap is default) */
+        flex-wrap: wrap;
+        /* The flex-flow property is a shorthand property for setting both the flex-direction and flex-wrap properties. */
+        flex-flow: row wrap;
+      }
+      .main-header__logo {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        width: 40%;
+        min-height: 4rem;
+        align-items: stretch;
+      }
+
+      .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40%;
+        min-height: 4rem;
+      }
+
+      .current-category {
+        font-size: 1.2rem;
+        font-family: inherit;
+      }
+
+      .main-header__nav {
+        width: 60%;
+        min-height: 4rem;
+        display: flex;
+        flex-flow: row wrap;
+        /* Horizontally aligns the flex items when the items do not use all available space on the main-axis */
+        justify-content: flex-end;
+        /* Vertically aligns the flex items when the items do not use all available space on the cross-axis */
+        align-items: stretch;
+      }
+
+      .categories-dropdown {
+        display: flex;
+        width: 20%;
+        min-width: 100px;
+        position: relative;
+        display: inline-block;
+        justify-content: center;
+      }
+
+      .categories-btn {
+        width: 100%;
+        height: 100%;
+        background-color: inherit;
+        text-align: center;
+        border: none;
+        font-size: 1vw;
+        font-family: inherit;
+      }
+
+      .categories-btn:hover {
+        color: rgb(0, 252, 248);
+        cursor: pointer;
+      }
+
+      .categories-content {
+        max-height: 400px;
+        width: 100%;
+        overflow: auto;
+        display: none;
+        position: absolute;
+        background-color: rgb(0, 252, 248);
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .categorize-btn {
+        height: 100%;
+        width: 100%;
+        color: black;
+        border: none;
+        background-color: inherit;
+        padding: 12px 16px;
+        text-decoration: none;
+        font-family: inherit;
+        font-size: 1vw;
+      }
+
+      .categorize-btn:hover {
+        background-color: rgb(0, 252, 248);
+        cursor: pointer;
+        display: block;
+      }
+
+      .categories-dropdown:hover .categories-content {
+        display: block;
+      }
+
+      .categories-dropdown:hover .categories-btn {
+        cursor: pointer;
+      }
+
+      .shuffle {
+        width: 20%;
+        display: flex;
+        min-width: 100px;
+
+        align-items: stretch;
+        justify-content: stretch;
+      }
+
+      .shuffle-form {
+        width: 100%;
+        height: 100%;
+      }
+
+      .shuffle-btn {
+        border: none;
+        background-color: inherit;
+        width: 100%;
+        height: 100%;
+        font-family: inherit;
+        font-size: 1vw;
+      }
+
+      .shuffle-btn:hover {
+        cursor: pointer;
+        color: rgb(0, 252, 248);
+      }
+
+      .search-game {
+        display: flex;
+        width: 40%;
+        min-width: 100px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .search-game-form {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .search {
+        height: 1.5rem;
+        width: 80%;
+        padding: 0.25rem;
+        background-color: rgb(0, 252, 248);
+        border: none;
+        border-radius: 0.5rem;
+        font-family: inherit;
+        font-size: inherit;
+      }
+
+      .search:hover {
+        border: none;
+        background-color: rgb(0, 252, 248);
+      }
+
+      .search:focus {
+        outline: none;
+        background-color: rgb(0, 252, 248);
+      }
+
+      .search-btn {
+        height: 2rem;
+        width: auto;
+        background-color: inherit;
+        border: none;
+        border-radius: 0.5rem;
+        font-family: inherit;
+        font-size: inherit;
+        cursor: pointer;
+      }
+
+      .search-btn:hover {
+        border: none;
+        color: rgb(0, 252, 248);
+      }
+
+      .bar {
+        display: none;
+      }
+
+      @media screen and (max-width: 600px) {
+        .main-header__nav {
+          display: none;
+        }
+
+        .bar {
+          width: 60%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          min-height: 4rem;
+        }
+
+        .icon {
+          background-color: inherit;
+          border: none;
+          margin: 5%;
+        }
+
+        .icon:hover {
+          cursor: pointer;
+        }
+
+        .responsive {
+          max-height: 400px;
+          width: 100%;
+          overflow: auto;
+          display: none;
+          position: absolute;
+          background-color: rgb(0, 252, 248);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          z-index: 1;
+        }
+      }
+
+      .game-container {
+        width: 100%;
+        background-color: inherit;
+        margin-top: 2rem;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-content: space-between;
+      }
+
+      .game-item {
+        width: 21%;
+        aspect-ratio: 1;
+        border-radius: 15%;
+        padding: 10px;
+        margin: 1.2%;
+        display: block;
+        text-align: center;
+        background: linear-gradient(45deg, #f93281, #f64c03, #f7fe22);
+      }
+
+      .game-item:hover {
+        background: rgb(0, 252, 248);
+      }
+
+      .game-image {
+        width: 80%;
+        aspect-ratio: 1;
+        margin: auto auto;
+      }
+
+      img {
+        border-radius: 15%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .game-open {
+        width: 100%;
+        height: 100%;
+      }
+
+      .game-open-button {
+        width: 100%;
+        height: 100%;
+        background-color: inherit;
+        border: none;
+        font-size: 1.5vw;
+        font-family: inherit;
+      }
+
+      .game-open-button:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="main-header__logo">
+        <div class="logo">
+          <i class="fa-solid fa-gamepad fa-2xl"></i>
+        </div>
+        <p class="current-category">Games</p>
+      </div>
+
+      <nav class="main-header__nav" id="main-header__nav">
+        <div class="categories-dropdown">
+          <button class="categories-btn">Categories</button>
+          <div class="categories-content">
+            <% for(category of categories){ %>
+            <form
+              class="categorize"
+              action="/games/<%= category %>"
+              method="GET"
+            >
+              <button class="categorize-btn"><%= category %></button>
+            </form>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="shuffle">
+          <% let randomGame = games[Math.floor(Math.random() * games.length)] %>
+          <form
+            class="shuffle-form"
+            action="/game/<%= randomGame.Title %>"
+            method="GET"
+          >
+            <button class="shuffle-btn" type="submit">Shuffle</button>
+          </form>
+        </div>
+
+        <div class="search-game">
+          <form
+            class="search-game-form"
+            action="/games/All?search=true"
+            method="POST"
+          >
+            <input
+              name="search"
+              class="search"
+              type="text"
+              placeholder="  Search Games  "
+            />
+            <button class="search-btn" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+        </div>
+      </nav>
+      <nav class="bar">
+        <button type="button" class="icon" onclick="openBar()">
+          <i class="fa-solid fa-bars fa-xl" style="color: #000000"></i>
+        </button>
+      </nav>
+    </header>
+    <main>
+      <div class="game-container">
+        <% for(game of games) { %>
+        <article class="game-item">
+          <form class="game-open" action="/game/<%= game.Title %>" method="GET">
+            <button class="game-open-button" type="submit">
+              <div class="game-image">
+                <img src="<%= game.Asset[0] %>" />
+              </div>
+              <div class="game-title"><%= game.Title %></div>
+            </button>
+          </form>
+        </article>
+        <% } %>
+      </div>
+    </main>
+  </body>
+</html>
+
+<script>
+  function openBar() {
+    var x = document.getElementById("main-header__nav");
+    if (x.className === "main-header__nav") {
+      x.className += " responsive";
+    } else {
+      x.className = "main-header__nav";
+    }
+  }
+</script>
