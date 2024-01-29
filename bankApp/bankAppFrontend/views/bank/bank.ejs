@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BankApp</title>
+  </head>
+  <body>
+    <form action="/transfer" method="POST">
+      <input type="number" id="iban" name="iban" />
+      <input type="number" id="transfer_amount" name="transfer_amount" />
+      <input type="hidden" id="token" name="token" value="<%= jwt %>" />
+      <button type="submit">Transfer</button>
+    </form>
+    <form action="/loan" method="POST">
+      <input type="number" id="loan_amount" name="loan_amount" />
+      <button type="submit">Loan</button>
+    </form>
+  </body>
+</html>
